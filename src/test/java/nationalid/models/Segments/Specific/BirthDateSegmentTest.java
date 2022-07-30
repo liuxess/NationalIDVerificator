@@ -1,4 +1,4 @@
-package nationalid.models.Segments.Lithuanian;
+package nationalid.models.Segments.Specific;
 
 import org.junit.Assert;
 import org.junit.experimental.theories.DataPoints;
@@ -42,4 +42,5 @@ public class BirthDateSegmentTest {
         NationalIDSegment segment = new RandomNumberSegment(new NationalID(3555870596L));
         Assert.assertNotNull(segment);
     }
+
 }

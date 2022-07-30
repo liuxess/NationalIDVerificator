@@ -1,4 +1,4 @@
-package nationalid.models.Segments.Lithuanian;
+package nationalid.models.Segments.Specific;
 
 import org.junit.Assert;
 import org.junit.experimental.theories.DataPoints;

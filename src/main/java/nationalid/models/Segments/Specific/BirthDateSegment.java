@@ -1,4 +1,4 @@
-package nationalid.models.Segments.Lithuanian;
+package nationalid.models.Segments.Specific;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;

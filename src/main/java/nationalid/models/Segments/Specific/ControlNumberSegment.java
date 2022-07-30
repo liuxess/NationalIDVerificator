@@ -1,4 +1,4 @@
-package nationalid.models.Segments.Lithuanian;
+package nationalid.models.Segments.Specific;
 
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.exceptions.LoggedException;

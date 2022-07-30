@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nationalid.enums.NationalIDSegmentType;
-import nationalid.factories.UsedIDSegmentFactory;
+import nationalid.factories.NationalIDSegmentFactory;
 import nationalid.models.NationalID;
 import nationalid.models.Segments.NationalIDSegment;
 
@@ -22,7 +22,7 @@ public class SegmentedNationalID {
 
     private void setID(NationalID ID) {
         this.ID = ID;
-        setNationalIDSegments(UsedIDSegmentFactory.get().GenerateListOfIDSegments(ID));
+        setNationalIDSegments(NationalIDSegmentFactory.GenerateListOfIDSegments(ID));
     }
 
     public NationalID getID() {

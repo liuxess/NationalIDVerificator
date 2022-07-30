@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class FileManager {
+public class FileManager {
 
     public static Boolean CreateFile(String fileName) throws IOException {
         File targetFile = new File(fileName);

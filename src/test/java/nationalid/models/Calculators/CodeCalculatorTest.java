@@ -42,6 +42,6 @@ public class CodeCalculatorTest {
     @Test
     public void testCalculateCodeValue() throws LoggedException {
         int calculationForZero = LithuanianCodeCalculator.CalculateCodeValue(0);
-        Assert.assertEquals(calculationForZero, 0);
+        Assert.assertEquals(0, calculationForZero);
     }
 }
