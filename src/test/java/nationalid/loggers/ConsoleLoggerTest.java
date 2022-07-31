@@ -48,7 +48,7 @@ public class ConsoleLoggerTest {
 
         logger.LogMessage(message);
 
-        Assert.assertEquals(message, outContent.toString());
+        Assert.assertEquals(message, errContent.toString());
 
     }
 }
