@@ -3,6 +3,7 @@ package nationalid.models;
 import nationalid.SegmentedNationalID;
 
 public class NationalID {
+
     long ID;
 
     public NationalID(long ID) {
