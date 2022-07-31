@@ -1,8 +1,12 @@
 package nationalid.helpers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class FileManager {
 
@@ -43,5 +47,11 @@ public class FileManager {
     public static void DeleteFile(String fileName) {
         File targetFile = new File(fileName);
         targetFile.delete();
+    }
+
+    public static String ReadFromFile(String fileName) throws IOException {
+        Path filePath = Path.of(fileName);
+
+        return Files.readString(filePath);
     }
 }
