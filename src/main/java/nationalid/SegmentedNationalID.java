@@ -16,6 +16,10 @@ public class SegmentedNationalID {
         setID(ID);
     }
 
+    public SegmentedNationalID(NationalID ID) {
+        setID(ID);
+    }
+
     private void setID(long ID) {
         setID(new NationalID(ID));
     }

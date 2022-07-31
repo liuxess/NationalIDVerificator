@@ -1,5 +1,7 @@
 package nationalid.models;
 
+import nationalid.SegmentedNationalID;
+
 public class NationalID {
     long ID;
 
@@ -13,6 +15,10 @@ public class NationalID {
 
     public long getID() {
         return ID;
+    }
+
+    public SegmentedNationalID Segment() {
+        return new SegmentedNationalID(this);
     }
 
 }
