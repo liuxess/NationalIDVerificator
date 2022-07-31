@@ -47,13 +47,13 @@ public class SegmentedNationalID {
         return true;
     }
 
-    public NationalIDSegmentBase getSegment(NationalIDSegmentType type) throws Exception {
+    public NationalIDSegmentBase getSegment(NationalIDSegmentType type) {
         for (NationalIDSegmentBase segment : nationalIDSegments) {
             if (segment.isOfType(type))
                 return segment;
         }
 
-        throw new Exception("This ID does not contain such a segment");
+        return null;
     }
 
     public List<String> getProblemList() {
