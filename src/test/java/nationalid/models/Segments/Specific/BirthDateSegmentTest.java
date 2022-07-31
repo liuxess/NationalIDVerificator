@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import nationalid.datapoints.NationalIDDataPoints;
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 
 @RunWith(Theories.class)
 public class BirthDateSegmentTest {
@@ -39,7 +39,7 @@ public class BirthDateSegmentTest {
 
     @Test
     public void testInheritence() {
-        NationalIDSegment segment = new RandomNumberSegment(new NationalID(3555870596L));
+        NationalIDSegmentBase segment = new RandomNumberSegment(new NationalID(3555870596L));
         Assert.assertNotNull(segment);
     }
 

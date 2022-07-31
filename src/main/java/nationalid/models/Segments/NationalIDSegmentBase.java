@@ -1,17 +1,18 @@
 package nationalid.models.Segments;
 
 import nationalid.enums.NationalIDSegmentType;
+import nationalid.exceptions.LoggedException;
 import nationalid.factories.NationalIDSegmentFactory;
 import nationalid.models.NationalID;
 
-public abstract class NationalIDSegment {
+public abstract class NationalIDSegmentBase {
     private NationalID basedOnID;
     private int segmentValue;
     private NationalIDSegmentType type;
     private Boolean isIncorrect;
     private String problemMessage;
 
-    public NationalIDSegment(NationalID ID, NationalIDSegmentType segmentType) {
+    public NationalIDSegmentBase(NationalID ID, NationalIDSegmentType segmentType) {
         setIsIncorrect(false);
         setType(segmentType);
         setBasedOnID(ID);
@@ -56,6 +57,7 @@ public abstract class NationalIDSegment {
     protected void setProblemMessage(String problemMessage) {
         setIsIncorrect(true);
         this.problemMessage = problemMessage;
+        new LoggedException(problemMessage);
     }
 
     private void setType(NationalIDSegmentType type) {

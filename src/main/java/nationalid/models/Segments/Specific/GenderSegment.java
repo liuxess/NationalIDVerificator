@@ -2,9 +2,9 @@ package nationalid.models.Segments.Specific;
 
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 
-public class GenderSegment extends NationalIDSegment {
+public class GenderSegment extends NationalIDSegmentBase {
 
     public GenderSegment(NationalID ID) {
         super(ID, NationalIDSegmentType.GENDER);

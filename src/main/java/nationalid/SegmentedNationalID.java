@@ -6,11 +6,11 @@ import java.util.List;
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.factories.NationalIDSegmentFactory;
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 
 public class SegmentedNationalID {
     NationalID ID;
-    List<NationalIDSegment> nationalIDSegments;
+    List<NationalIDSegmentBase> nationalIDSegments;
 
     public SegmentedNationalID(long ID) {
         setID(ID);
@@ -29,12 +29,12 @@ public class SegmentedNationalID {
         return ID;
     }
 
-    private void setNationalIDSegments(List<NationalIDSegment> segmentList) {
+    private void setNationalIDSegments(List<NationalIDSegmentBase> segmentList) {
         nationalIDSegments = segmentList;
     }
 
     public Boolean VerifyIntegrity() {
-        for (NationalIDSegment segment : nationalIDSegments) {
+        for (NationalIDSegmentBase segment : nationalIDSegments) {
             if (!segment.Verify()) {
                 return false;
             }
@@ -43,8 +43,8 @@ public class SegmentedNationalID {
         return true;
     }
 
-    public NationalIDSegment getSegment(NationalIDSegmentType type) throws Exception {
-        for (NationalIDSegment segment : nationalIDSegments) {
+    public NationalIDSegmentBase getSegment(NationalIDSegmentType type) throws Exception {
+        for (NationalIDSegmentBase segment : nationalIDSegments) {
             if (segment.isOfType(type))
                 return segment;
         }

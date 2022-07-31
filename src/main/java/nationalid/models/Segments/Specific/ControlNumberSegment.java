@@ -4,9 +4,9 @@ import nationalid.enums.NationalIDSegmentType;
 import nationalid.exceptions.LoggedException;
 import nationalid.models.NationalID;
 import nationalid.models.Calculators.LithuanianCodeCalculator;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 
-public class ControlNumberSegment extends NationalIDSegment {
+public class ControlNumberSegment extends NationalIDSegmentBase {
 
     public ControlNumberSegment(NationalID ID) {
         super(ID, NationalIDSegmentType.CONTROL_DIGIT);

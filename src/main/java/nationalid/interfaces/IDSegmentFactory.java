@@ -3,11 +3,11 @@ package nationalid.interfaces;
 import java.util.List;
 
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 
 public interface IDSegmentFactory {
 
-    List<NationalIDSegment> GenerateListOfIDSegments(NationalID ID);
+    List<NationalIDSegmentBase> GenerateListOfIDSegments(NationalID ID);
 
     int getNumberOfSegments();
 

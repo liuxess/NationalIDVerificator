@@ -6,7 +6,7 @@ import java.util.List;
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.helpers.NumberManager;
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 import nationalid.models.Segments.Specific.BirthDateSegment;
 import nationalid.models.Segments.Specific.ControlNumberSegment;
 import nationalid.models.Segments.Specific.GenderSegment;
@@ -15,8 +15,8 @@ import nationalid.models.Segments.Specific.RandomNumberSegment;
 public class NationalIDSegmentFactory {
     static final int numberOfSegments = 4;
 
-    public static List<NationalIDSegment> GenerateListOfIDSegments(NationalID ID) {
-        List<NationalIDSegment> segmentList = new ArrayList<NationalIDSegment>();
+    public static List<NationalIDSegmentBase> GenerateListOfIDSegments(NationalID ID) {
+        List<NationalIDSegmentBase> segmentList = new ArrayList<NationalIDSegmentBase>();
 
         segmentList.add(CreateSegment(ID, NationalIDSegmentType.GENDER));
         segmentList.add(CreateSegment(ID, NationalIDSegmentType.BIRTH_DATE));
@@ -30,7 +30,7 @@ public class NationalIDSegmentFactory {
         return numberOfSegments;
     }
 
-    public static NationalIDSegment CreateSegment(NationalID ID, NationalIDSegmentType type) {
+    public static NationalIDSegmentBase CreateSegment(NationalID ID, NationalIDSegmentType type) {
         return switch (type) {
             // Take off the last 10 symbols
             case GENDER -> createGenderSegment(ID);

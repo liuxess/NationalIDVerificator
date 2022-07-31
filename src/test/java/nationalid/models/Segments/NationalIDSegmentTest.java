@@ -17,7 +17,7 @@ import nationalid.models.NationalID;
 @RunWith(Theories.class)
 public class NationalIDSegmentTest {
 
-    static class TestingInheritor extends NationalIDSegment {
+    static class TestingInheritor extends NationalIDSegmentBase {
         public TestingInheritor(long ID, NationalIDSegmentType segmentType) {
             super(new NationalID(ID), segmentType);
         }
@@ -29,8 +29,8 @@ public class NationalIDSegmentTest {
     }
 
     @DataPoints("goodValues")
-    public static ArrayList<NationalIDSegment> getGoodSegments() {
-        ArrayList<NationalIDSegment> nationalIDSegmentArray = new ArrayList<>();
+    public static ArrayList<NationalIDSegmentBase> getGoodSegments() {
+        ArrayList<NationalIDSegmentBase> nationalIDSegmentArray = new ArrayList<>();
         long[] IDList = NationalIDDataPoints.getGoodNationalIDs();
 
         for (long ID : IDList) {
@@ -44,7 +44,7 @@ public class NationalIDSegmentTest {
     }
 
     @Theory
-    public void testGetBasedOnID(@FromDataPoints("goodValues") NationalIDSegment segment) {
+    public void testGetBasedOnID(@FromDataPoints("goodValues") NationalIDSegmentBase segment) {
         NationalID nationalID = segment.getBasedOnID();
         Assert.assertTrue(nationalID.getID() > 0);
     }
@@ -55,7 +55,7 @@ public class NationalIDSegmentTest {
     }
 
     @Theory
-    public void testIsOfType(@FromDataPoints("goodValues") NationalIDSegment segment) {
+    public void testIsOfType(@FromDataPoints("goodValues") NationalIDSegmentBase segment) {
 
     }
 

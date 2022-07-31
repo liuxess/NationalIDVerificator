@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat;
 
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 
-public class BirthDateSegment extends NationalIDSegment {
+public class BirthDateSegment extends NationalIDSegmentBase {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
 

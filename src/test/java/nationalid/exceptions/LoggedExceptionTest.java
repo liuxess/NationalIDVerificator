@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import nationalid.loggers.ConsoleLogger;
-import nationalid.loggers.FileLogger;
 import nationalid.loggers.LogManager;
 import nationalid.loggers.TestingLogger;
 

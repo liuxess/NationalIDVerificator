@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import nationalid.datapoints.NationalIDDataPoints;
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegment;
+import nationalid.models.Segments.NationalIDSegmentBase;
 import nationalid.models.Segments.Specific.BirthDateSegment;
 import nationalid.models.Segments.Specific.ControlNumberSegment;
 import nationalid.models.Segments.Specific.GenderSegment;
@@ -81,10 +81,10 @@ public class SegmentedNationalIDTest {
     public void testGetSegment() throws Exception {
         SegmentedNationalID segmentedNationalID = new SegmentedNationalID(0);
 
-        NationalIDSegment genderSegment = segmentedNationalID.getSegment(NationalIDSegmentType.GENDER);
-        NationalIDSegment birthDateSegment = segmentedNationalID.getSegment(NationalIDSegmentType.BIRTH_DATE);
-        NationalIDSegment randomSegment = segmentedNationalID.getSegment(NationalIDSegmentType.RANDOM_DIGITS);
-        NationalIDSegment controlSegment = segmentedNationalID.getSegment(NationalIDSegmentType.CONTROL_DIGIT);
+        NationalIDSegmentBase genderSegment = segmentedNationalID.getSegment(NationalIDSegmentType.GENDER);
+        NationalIDSegmentBase birthDateSegment = segmentedNationalID.getSegment(NationalIDSegmentType.BIRTH_DATE);
+        NationalIDSegmentBase randomSegment = segmentedNationalID.getSegment(NationalIDSegmentType.RANDOM_DIGITS);
+        NationalIDSegmentBase controlSegment = segmentedNationalID.getSegment(NationalIDSegmentType.CONTROL_DIGIT);
 
         Assert.assertTrue(genderSegment instanceof GenderSegment);
         Assert.assertTrue(birthDateSegment instanceof BirthDateSegment);

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.LongFunction;
 
 import nationalid.interfaces.Logable;
 
@@ -69,6 +68,9 @@ public class LogManager {
     }
 
     void sendMessageToLoggers(String message, Logable... ignoredLoggers) {
+        if (registeredLoggers.size() == 0)
+            return; // No loggers registered, so logs die silently
+
         List<Logable> usableLoggers = registeredLoggers
                 .parallelStream()
                 .filter(logger -> Arrays.stream(ignoredLoggers)
