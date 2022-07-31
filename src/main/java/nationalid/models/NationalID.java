@@ -4,7 +4,7 @@ import nationalid.SegmentedNationalID;
 
 public class NationalID {
 
-    long ID;
+    private long ID;
 
     public NationalID(long ID) {
         setID(ID);

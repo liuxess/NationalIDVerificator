@@ -9,8 +9,8 @@ import nationalid.models.NationalID;
 import nationalid.models.Segments.NationalIDSegmentBase;
 
 public class SegmentedNationalID {
-    NationalID ID;
-    List<NationalIDSegmentBase> nationalIDSegments;
+    private NationalID ID;
+    private List<NationalIDSegmentBase> nationalIDSegments;
 
     public SegmentedNationalID(long ID) {
         setID(ID);

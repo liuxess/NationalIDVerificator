@@ -1,6 +1,7 @@
 package nationalid.models.Segments.Specific;
 
 import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import nationalid.enums.NationalIDSegmentType;
@@ -61,13 +62,9 @@ public class BirthDateSegment extends NationalIDSegmentBase {
     }
 
     private Date strictToDate() throws Exception {
-        int segmentValue = getSegmentValue();
-        String stringExpression = String.valueOf(segmentValue);
 
-        // Add leading 0s so there is 6 symbols
-        stringExpression = "0".repeat(6 - stringExpression.length()).concat(stringExpression);
-
-        Date dateExpression = dateFormat.parse(stringExpression);
+        String stringExpression = getFullDateExpression();
+        Date dateExpression = toDate();
 
         // Since date expression of 70/12/32 evaluates to 71/01/01, need to verify that
         // the date does not go out of the index and stays the same
@@ -77,6 +74,21 @@ public class BirthDateSegment extends NationalIDSegmentBase {
         }
 
         return dateExpression;
+    }
+
+    public Date toDate() throws ParseException {
+        String stringExpression = getFullDateExpression();
+
+        return dateFormat.parse(stringExpression);
+    }
+
+    private String getFullDateExpression() {
+
+        String stringExpression = String.valueOf(getSegmentValue());
+
+        // Add leading 0s so there is 6 symbols
+        stringExpression = "0".repeat(6 - stringExpression.length()).concat(stringExpression);
+        return stringExpression;
     }
 
 }

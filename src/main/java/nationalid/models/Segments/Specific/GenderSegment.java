@@ -1,5 +1,7 @@
 package nationalid.models.Segments.Specific;
 
+import javax.sound.sampled.BooleanControl;
+
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.models.NationalID;
 import nationalid.models.Segments.NationalIDSegmentBase;
@@ -29,4 +31,12 @@ public class GenderSegment extends NationalIDSegmentBase {
         return correctRange;
     }
 
+    public Boolean IsMale() {
+        if (IsIncorrect())
+            return null;
+
+        // Could simplify by getSegmentValue() % 2 == 1, but this should be faster
+        int segmentValue = getSegmentValue();
+        return segmentValue == 3 || segmentValue == 5;
+    }
 }

@@ -4,11 +4,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>nationalid</groupId>
-  <artifactId>demo</artifactId>
+  <groupId>telesfotastask</groupId>
+  <artifactId>nationalid</artifactId>
   <version>0.01-alpha</version>
+  
+  <packaging>jar</packaging>
 
-  <name>demo</name>
+  <name>NationalID</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -69,6 +71,39 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>
+                            ${project.build.directory}/libs
+                        </outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <configuration>
+              <archive>
+                  <manifest>
+                      <addClasspath>true</addClasspath>
+                      <classpathPrefix>libs/</classpathPrefix>
+                      <mainClass>
+                          com.baeldung.executable.ExecutableMavenJar
+                      </mainClass>
+                  </manifest>
+              </archive>
+          </configuration>
+      </plugin>
       </plugins>
     </pluginManagement>
   </build>

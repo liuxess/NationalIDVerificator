@@ -34,7 +34,7 @@ public abstract class NationalIDSegmentBase {
         this.basedOnID = basedOnID;
     }
 
-    protected int getSegmentValue() {
+    public int getSegmentValue() {
         return segmentValue;
     }
 
