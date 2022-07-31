@@ -39,4 +39,9 @@ public class FileManager {
         fileWriter.write(message);
         fileWriter.close();
     }
+
+    public static void DeleteFile(String fileName) {
+        File targetFile = new File(fileName);
+        targetFile.delete();
+    }
 }
