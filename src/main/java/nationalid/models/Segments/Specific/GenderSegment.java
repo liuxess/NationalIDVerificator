@@ -1,7 +1,5 @@
 package nationalid.models.Segments.Specific;
 
-import javax.sound.sampled.BooleanControl;
-
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.models.NationalID;
 import nationalid.models.Segments.NationalIDSegmentBase;
@@ -38,5 +36,12 @@ public class GenderSegment extends NationalIDSegmentBase {
         // Could simplify by getSegmentValue() % 2 == 1, but this should be faster
         int segmentValue = getSegmentValue();
         return segmentValue == 3 || segmentValue == 5;
+    }
+
+    public int getCentury() {
+        int segmentValue = getSegmentValue();
+
+        // 3 or 4 means 20th century, 5 or 6 mean 21st
+        return segmentValue < 5 ? 20 : 21;
     }
 }

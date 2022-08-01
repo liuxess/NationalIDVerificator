@@ -1,8 +1,10 @@
 package nationalid.models.Segments.Specific;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import nationalid.enums.NationalIDSegmentType;
 import nationalid.models.NationalID;
@@ -10,7 +12,8 @@ import nationalid.models.Segments.NationalIDSegmentBase;
 
 public class BirthDateSegment extends NationalIDSegmentBase {
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+    final String dateFormatPattern = "yyMMdd";
+    SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatPattern);
 
     public BirthDateSegment(NationalID ID) {
         super(ID, NationalIDSegmentType.BIRTH_DATE);
@@ -79,6 +82,14 @@ public class BirthDateSegment extends NationalIDSegmentBase {
     public Date toDate() throws ParseException {
         String stringExpression = getFullDateExpression();
 
+        return dateFormat.parse(stringExpression);
+    }
+
+    public Date toDate(int Century) throws ParseException {
+
+        String stringExpression = getFullDateExpression();
+        stringExpression = String.format("%d%s", Century, stringExpression);
+        dateFormat.applyPattern("yy" + dateFormatPattern);
         return dateFormat.parse(stringExpression);
     }
 
