@@ -88,7 +88,7 @@ public class BirthDateSegment extends NationalIDSegmentBase {
     public Date toDate(int Century) throws ParseException {
 
         String stringExpression = getFullDateExpression();
-        stringExpression = String.format("%d%s", Century, stringExpression);
+        stringExpression = String.format("%d%s", Century - 1, stringExpression);
         dateFormat.applyPattern("yy" + dateFormatPattern);
         return dateFormat.parse(stringExpression);
     }
