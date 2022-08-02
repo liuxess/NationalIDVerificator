@@ -89,8 +89,8 @@ public class BirthDateSegment extends NationalIDSegmentBase {
 
         String stringExpression = getFullDateExpression();
         stringExpression = String.format("%d%s", Century - 1, stringExpression);
-        dateFormat.applyPattern("yy" + dateFormatPattern);
-        return dateFormat.parse(stringExpression);
+        SimpleDateFormat fullDateFormat = new SimpleDateFormat("yy" + dateFormatPattern);
+        return fullDateFormat.parse(stringExpression);
     }
 
     private String getFullDateExpression() {
