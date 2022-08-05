@@ -14,23 +14,23 @@ import nationalid.models.NationalID;
 public class GenderSegmentTest {
 
     @DataPoints("goodValues")
-    public static long[] goodValues() {
+    public static String[] goodValues() {
         return NationalIDDataPoints.getGoodNationalIDs();
     }
 
     @DataPoints("badValues")
-    public static long[] badValues() {
-        return new long[] { -421454, 99999, 7012324099L, 97012324099L, 17012324099L };
+    public static String[] badValues() {
+        return new String[] { "-421454", "99999", "7012324099", "97012324099", "17012324099" };
     }
 
     @Theory
-    public void testVerifyWithGoodIDs(@FromDataPoints("goodValues") long ID) {
+    public void testVerifyWithGoodIDs(@FromDataPoints("goodValues") String ID) {
         GenderSegment segment = new GenderSegment(new NationalID(ID));
         Assert.assertTrue(segment.Verify());
     }
 
     @Theory
-    public void testVerifyWithBadIDs(@FromDataPoints("badValues") long ID) {
+    public void testVerifyWithBadIDs(@FromDataPoints("badValues") String ID) {
         GenderSegment segment = new GenderSegment(new NationalID(ID));
         Assert.assertTrue(!segment.Verify());
     }

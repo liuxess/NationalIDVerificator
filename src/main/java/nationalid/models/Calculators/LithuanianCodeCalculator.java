@@ -1,62 +1,69 @@
 package nationalid.models.Calculators;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
-import nationalid.exceptions.LoggedException;
+import nationalid.helpers.NumberManager;
+import nationalid.interfaces.CodeCalculationStrategy;
 
-public class LithuanianCodeCalculator {
+/**
+ * A CodeCalculationStrategy implementationg for Lithuanian IDs
+ */
+public class LithuanianCodeCalculator implements CodeCalculationStrategy {
     private final static int[] firstMultiplicationCoefficients = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0 };
     private final static int[] secondMultiplicationCoefficients = { 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 0 };
-
     private final static int expectedSize = 11;
 
-    public static int CalculateCodeValue(long number) throws LoggedException {
-        ArrayList<Integer> digitList = getDigitListFromNumber(number);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see nationalid.interfaces.CodeCalculationStrategy#CalculateCodeValue(long)
+     */
+    public Optional<Integer> CalculateCodeValue(long number) {
+        ArrayList<Integer> digitList = NumberManager.getDigitListFromNumber(number);
         // Size has to be 11
         while (digitList.size() < expectedSize) {
             digitList.add(0, 0);
         }
-        int calculatedValue;
-        try {
-            calculatedValue = Calculation(digitList, firstMultiplicationCoefficients);
-            if (calculatedValue < 10) {
-                return calculatedValue;
-            }
+        Optional<Integer> calculatedValue;
+        calculatedValue = Calculation(digitList, firstMultiplicationCoefficients);
 
-            calculatedValue = Calculation(digitList, secondMultiplicationCoefficients);
+        // If it's empty, retun the empty
+        if (calculatedValue.isEmpty())
+            return calculatedValue;
 
-            return calculatedValue == 10 ? 0 : calculatedValue;
-        } catch (Exception ex) {
-            throw new LoggedException(ex);
+        if (calculatedValue.get() < 10) {
+            return calculatedValue;
         }
 
+        calculatedValue = Calculation(digitList, secondMultiplicationCoefficients);
+
+        // If it's empty, retun the empty
+        if (calculatedValue.isEmpty())
+            return calculatedValue;
+
+        return calculatedValue.get() == 10 ? Optional.of(0) : calculatedValue;
     }
 
-    private static ArrayList<Integer> getDigitListFromNumber(long number) {
-        ArrayList<Integer> digitList = new ArrayList<>();
-        String numberAsString = String.valueOf(number);
-        char[] digitCharArray = numberAsString.toCharArray();
-
-        for (char c : digitCharArray) {
-            // Converting each character to a seperate digit
-            digitList.add(Character.getNumericValue(c));
-        }
-
-        return digitList;
-    }
-
-    private static int Calculation(ArrayList<Integer> digitList, int[] coefficient) throws Exception {
-        int sum = 0;
-
+    /**
+     * Calculates the required code
+     * 
+     * @param digitList   Array of digits from the ID
+     * @param coefficient to be applied to the digits
+     * @return Empty if there's a problem; Value once the calculations are made
+     */
+    private static Optional<Integer> Calculation(ArrayList<Integer> digitList, int[] coefficient) {
         if (digitList.size() != coefficient.length) {
-            throw new Exception("The number of digits does not match provided integer array length");
+            return Optional.empty();
         }
+
+        int sum = 0;
 
         for (int i = 0; i < coefficient.length; i++) {
             sum += digitList.get(i) * coefficient[i];
         }
 
-        return sum % 11;
+        return Optional.of(sum % 11);
     }
 
 }

@@ -18,22 +18,22 @@ import nationalid.models.NationalID;
 public class NationalIDSegmentTest {
 
     static class TestingInheritor extends NationalIDSegmentBase {
-        public TestingInheritor(long ID, NationalIDSegmentType segmentType) {
+        public TestingInheritor(String ID, NationalIDSegmentType segmentType) {
             super(new NationalID(ID), segmentType);
         }
 
         @Override
         public Boolean Verify() {
-            return getBasedOnID().getID() > 0;
+            return !getBasedOnID().getID().isBlank();
         }
     }
 
     @DataPoints("goodValues")
     public static ArrayList<NationalIDSegmentBase> getGoodSegments() {
         ArrayList<NationalIDSegmentBase> nationalIDSegmentArray = new ArrayList<>();
-        long[] IDList = NationalIDDataPoints.getGoodNationalIDs();
+        String[] IDList = NationalIDDataPoints.getGoodNationalIDs();
 
-        for (long ID : IDList) {
+        for (String ID : IDList) {
             nationalIDSegmentArray.add(new TestingInheritor(ID, NationalIDSegmentType.GENDER));
             nationalIDSegmentArray.add(new TestingInheritor(ID, NationalIDSegmentType.BIRTH_DATE));
             nationalIDSegmentArray.add(new TestingInheritor(ID, NationalIDSegmentType.RANDOM_DIGITS));
@@ -46,7 +46,7 @@ public class NationalIDSegmentTest {
     @Theory
     public void testGetBasedOnID(@FromDataPoints("goodValues") NationalIDSegmentBase segment) {
         NationalID nationalID = segment.getBasedOnID();
-        Assert.assertTrue(nationalID.getID() > 0);
+        Assert.assertFalse(nationalID.getID().isBlank());
     }
 
     @Test

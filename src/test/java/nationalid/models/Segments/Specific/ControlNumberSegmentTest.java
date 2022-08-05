@@ -8,30 +8,33 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import nationalid.datapoints.NationalIDDataPoints;
+import nationalid.interfaces.CodeCalculationStrategy;
 import nationalid.models.NationalID;
+import nationalid.models.Calculators.LithuanianCodeCalculator;
 
 @RunWith(Theories.class)
 public class ControlNumberSegmentTest {
+    private CodeCalculationStrategy strategyForTesting = new LithuanianCodeCalculator();
 
     @DataPoints("goodValues")
-    public static long[] goodValues() {
+    public static String[] goodValues() {
         return NationalIDDataPoints.getGoodNationalIDs();
     }
 
     @DataPoints("badValues")
-    public static long[] badValues() {
-        return new long[] { -421454, 99999, 7012324099L, 97012324099L, 17012324099L };
+    public static String[] badValues() {
+        return new String[] { "-421454", "99999", "7012324099", "97012324099", "17012324099" };
     }
 
     @Theory
-    public void testVerifyWithGoodIDs(@FromDataPoints("goodValues") long ID) {
-        ControlNumberSegment segment = new ControlNumberSegment(new NationalID(ID));
+    public void testVerifyWithGoodIDs(@FromDataPoints("goodValues") String ID) {
+        ControlNumberSegment segment = new ControlNumberSegment(new NationalID(ID), strategyForTesting);
         Assert.assertTrue(segment.Verify());
     }
 
     @Theory
-    public void testVerifyWithBadIDs(@FromDataPoints("badValues") long ID) {
-        ControlNumberSegment segment = new ControlNumberSegment(new NationalID(ID));
+    public void testVerifyWithBadIDs(@FromDataPoints("badValues") String ID) {
+        ControlNumberSegment segment = new ControlNumberSegment(new NationalID(ID), strategyForTesting);
         Assert.assertTrue(!segment.Verify());
     }
 

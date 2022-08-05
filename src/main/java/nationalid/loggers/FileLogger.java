@@ -7,13 +7,39 @@ import java.time.format.DateTimeFormatter;
 import nationalid.helpers.FileManager;
 import nationalid.interfaces.Logable;
 
+/**
+ * Designed to log messages to a pysical file
+ * 
+ * @see nationalid.interfaces.Logable
+ */
 public class FileLogger implements Logable {
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see nationalid.interfaces.Logable#LogMessage(java.lang.String)
+     */
     @Override
     public void LogMessage(String message) throws Exception {
         LogToFile(message);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * nationalid.interfaces.Logable#CompareInstance(nationalid.interfaces.Logable)
+     */
+    @Override
+    public Boolean CompareInstance(Logable other) {
+        return other instanceof FileLogger;
+    }
+
+    /**
+     * Generates a name for the log file based on current day
+     * 
+     * @return generated file name
+     */
     private static String GenerateLogName() {
         LocalDate currentDate = LocalDate.now();
 
@@ -25,6 +51,13 @@ public class FileLogger implements Logable {
         return logFileName;
     }
 
+    /**
+     * Attempts to log the message to a log file
+     * 
+     * @param message to log
+     * @throws Exception if there were problems writing
+     * @see nationalid.helpers.FileManager#ForceWriteToFile(String, String)
+     */
     private static void LogToFile(String message) throws Exception {
         String fileName = GenerateLogName();
         try {
@@ -34,8 +67,4 @@ public class FileLogger implements Logable {
         }
     }
 
-    @Override
-    public Boolean CompareInstance(Logable other) {
-        return other instanceof FileLogger;
-    }
 }

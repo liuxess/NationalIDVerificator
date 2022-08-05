@@ -9,17 +9,11 @@ import nationalid.loggers.TestingLogger;
 
 public class LoggedExceptionTest {
 
-    public static TestingLogger logger;
-
-    @Before
-    public void assignLoggers() {
-        logger = new TestingLogger();
-        LogManager.getGlobalInstance().addLogger(logger);
-    }
-
     @Test
     public void testConstruction() {
-        new LoggedException("Conducting Tests");
-        Assert.assertTrue(logger.IsMessageLogged());
+        TestingLogger testingLogger = new TestingLogger();
+        LogManager logManager = new LogManager(false, testingLogger);
+        new LoggedException("Conducting Tests", logManager);
+        Assert.assertTrue(testingLogger.IsMessageLogged());
     }
 }

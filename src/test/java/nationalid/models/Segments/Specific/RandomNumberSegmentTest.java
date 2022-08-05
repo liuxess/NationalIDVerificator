@@ -10,37 +10,30 @@ import org.junit.Test;
 
 import nationalid.datapoints.NationalIDDataPoints;
 import nationalid.models.NationalID;
-import nationalid.models.Segments.NationalIDSegmentBase;
 
 @RunWith(Theories.class)
 public class RandomNumberSegmentTest {
 
     @DataPoints("goodValues")
-    public static long[] goodValues() {
+    public static String[] goodValues() {
         return NationalIDDataPoints.getGoodNationalIDs();
     }
 
     @DataPoints("badValues")
-    public static long[] badValues() {
-        return new long[] { 0, -421, 9 };
+    public static String[] badValues() {
+        return new String[] { "0", "-421", "9" };
     }
 
     @Theory
-    public void testVerifyWithGoodIDs(@FromDataPoints("goodValues") long ID) {
+    public void testVerifyWithGoodIDs(@FromDataPoints("goodValues") String ID) {
         RandomNumberSegment segment = new RandomNumberSegment(new NationalID(ID));
         Assert.assertTrue(segment.Verify());
     }
 
     @Theory
-    public void testVerifyWithBadIDs(@FromDataPoints("badValues") long ID) {
+    public void testVerifyWithBadIDs(@FromDataPoints("badValues") String ID) {
         RandomNumberSegment segment = new RandomNumberSegment(new NationalID(ID));
-        Assert.assertTrue(segment.Verify());
-    }
-
-    @Test
-    public void testInheritence() {
-        NationalIDSegmentBase segment = new RandomNumberSegment(new NationalID(3555870596L));
-        Assert.assertNotNull(segment);
+        Assert.assertFalse(segment.Verify());
     }
 
 }
