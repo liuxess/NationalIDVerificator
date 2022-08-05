@@ -15,7 +15,7 @@ import nationalid.enums.NationalIDSegmentType;
 import nationalid.models.NationalID;
 
 @RunWith(Theories.class)
-public class NationalIDSegmentTest {
+public class NationalIDSegmentBaseTest {
 
     static class TestingInheritor extends NationalIDSegmentBase {
         public TestingInheritor(String ID, NationalIDSegmentType segmentType) {
@@ -25,6 +25,10 @@ public class NationalIDSegmentTest {
         @Override
         public Boolean Verify() {
             return !getBasedOnID().getID().isBlank();
+        }
+
+        public void setTestingProblemMessage(String message) {
+            setProblemMessage(message);
         }
     }
 
@@ -50,17 +54,11 @@ public class NationalIDSegmentTest {
     }
 
     @Test
-    public void testGetProblemMessage() {
-
+    public void testGetSetProblemMessage() {
+        TestingInheritor testingSegment = new TestingInheritor("000", NationalIDSegmentType.RANDOM_DIGITS);
+        String problemMessage = "Testing message";
+        testingSegment.setTestingProblemMessage(problemMessage);
+        Assert.assertTrue(problemMessage.equals(testingSegment.getProblemMessage().get()));
     }
 
-    @Theory
-    public void testIsOfType(@FromDataPoints("goodValues") NationalIDSegmentBase segment) {
-
-    }
-
-    @Test
-    public void testSetProblemMessage() {
-
-    }
 }

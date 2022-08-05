@@ -17,7 +17,7 @@ import nationalid.models.Segments.Specific.RandomNumberSegment;
  */
 public class NationalIDSegmentFactory {
     // TODO: Should be replaced by a calculation Strategy to support various ids
-    static final int numberOfSegments = 4;
+    private static final int numberOfSegments = 4;
 
     // region: Public methods
 

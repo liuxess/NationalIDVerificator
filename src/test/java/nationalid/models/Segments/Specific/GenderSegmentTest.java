@@ -1,5 +1,7 @@
 package nationalid.models.Segments.Specific;
 
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.FromDataPoints;
@@ -8,6 +10,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import nationalid.datapoints.NationalIDDataPoints;
+import nationalid.enums.Gender;
 import nationalid.models.NationalID;
 
 @RunWith(Theories.class)
@@ -33,6 +36,26 @@ public class GenderSegmentTest {
     public void testVerifyWithBadIDs(@FromDataPoints("badValues") String ID) {
         GenderSegment segment = new GenderSegment(new NationalID(ID));
         Assert.assertTrue(!segment.Verify());
+    }
+
+    public static record IDsAndGenders(NationalID nationalID, Gender gender) {
+    };
+
+    @DataPoints("testingIDsAndGenders")
+    public static IDsAndGenders[] testingIDsAndGenders() {
+        return new IDsAndGenders[] {
+                new IDsAndGenders(new NationalID("30000000000"), Gender.MALE),
+                new IDsAndGenders(new NationalID("40000000000"), Gender.FEMALE),
+                new IDsAndGenders(new NationalID("50000000000"), Gender.MALE),
+                new IDsAndGenders(new NationalID("60000000000"), Gender.FEMALE),
+        };
+    }
+
+    @Theory
+    public void testGetGender(@FromDataPoints("testingIDsAndGenders") IDsAndGenders testingTarget) {
+        GenderSegment segment = new GenderSegment(testingTarget.nationalID);
+        Optional<Gender> parsedGender = segment.getGender();
+        Assert.assertTrue(testingTarget.gender == parsedGender.get());
     }
 
 }

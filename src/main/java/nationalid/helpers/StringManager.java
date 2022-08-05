@@ -11,9 +11,9 @@ public class StringManager {
      * by making sure that the provided integer values
      * do not cause a runtime exception
      * 
-     * @param target string to be substringed
-     * @param from   index of symbol to start the substring
-     * @param to     index of symbol before which the substring ends
+     * @param target     string to be substringed
+     * @param startIndex index of symbol to start the substring
+     * @param endIndex   index of symbol before which the substring ends
      * @return substring based on values:
      *         <ul>
      *         <li>if from is out of bounds, empty String is
@@ -23,16 +23,16 @@ public class StringManager {
      *         <li>Otherwise, return defined substring</li>
      *         </ul>
      */
-    public static String SafeSubstring(String target, int from, int to) {
-        if (from > target.length()) {
+    public static String SafeSubstring(String target, int startIndex, int endIndex) {
+        if (startIndex > target.length()) {
             return "";
         }
 
-        if (to > target.length()) {
-            to = target.length();
+        if (endIndex > target.length()) {
+            endIndex = target.length();
         }
 
-        return target.substring(from, to);
+        return target.substring(startIndex, endIndex);
 
     }
 
