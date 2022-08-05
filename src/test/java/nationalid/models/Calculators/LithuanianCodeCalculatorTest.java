@@ -2,13 +2,12 @@ package nationalid.models.Calculators;
 
 import java.util.Optional;
 
-import org.junit.Test;
+import org.junit.Assert;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.FromDataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
-import org.junit.Assert;
 
 import nationalid.datapoints.NationalIDDataPoints;
 import nationalid.helpers.NumberManager;

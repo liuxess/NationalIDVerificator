@@ -3,7 +3,6 @@ package nationalid.models.Segments.Specific;
 import java.util.Optional;
 
 import nationalid.enums.NationalIDSegmentType;
-import nationalid.exceptions.LoggedException;
 import nationalid.helpers.NumberManager;
 import nationalid.interfaces.CodeCalculationStrategy;
 import nationalid.models.NationalID;

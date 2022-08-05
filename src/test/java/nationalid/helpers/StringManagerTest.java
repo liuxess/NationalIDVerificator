@@ -1,7 +1,6 @@
 package nationalid.helpers;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.FromDataPoints;
 import org.junit.experimental.theories.Theories;

@@ -1,13 +1,11 @@
 package nationalid;
 
-import org.junit.Test;
-
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.FromDataPoints;
 import org.junit.experimental.theories.Theories;
