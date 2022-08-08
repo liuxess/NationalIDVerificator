@@ -12,7 +12,7 @@ import nationalid.interfaces.CodeCalculationStrategy;
 public class GlobalCodeCalculator {
 
     private static CodeCalculationStrategy globalInstace;
-    private static Boolean globalInstanceIsAssigned;
+    private static Boolean globalInstanceIsAssigned = false;
 
     /**
      * Gets an assigned CodeCalculationStrategy. If it is not assigned, will lof an
